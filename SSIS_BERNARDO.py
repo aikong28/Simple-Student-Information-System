@@ -100,7 +100,7 @@ def UpdateStudent():
             print("ID Number has been successfully updated")
     
     else:
-        print("ID Number could not be found")
+        print("Sorry but ID Number could not be found")
         
     input("Press any key to continue: ")
     
@@ -115,23 +115,23 @@ def DeleteStudent():
     print("------------------------")
     
     IDnum = input("Enter ID Number of student to remove: ")
-    student_Found = False
-    updated_data = []
+    StudentFound = False
+    UpdatedData = []
     with open(SDatabase, "r", encoding = "utf-8") as f:
         reader = csv.reader(f)
         counter = 0
         for row in reader:
             if len(row) > 0:
                 if IDnum != row[0]:
-                    updated_data.append(row)
+                    UpdatedData.append(row)
                     counter += 1
                 else:
-                    student_Found = True
+                    StudentFound = True
     
-    if student_Found is True:
+    if StudentFound is True:
         with open(SDatabase, "w", encoding = "utf-8") as f:
             writer = csv.writer(f)
-            writer.writerows(updated_data)
+            writer.writerows(UpdatedData)
         print("ID Number: ", IDnum, "has been removed successfully")
     
     else:

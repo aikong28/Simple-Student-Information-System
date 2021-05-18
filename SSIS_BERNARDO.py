@@ -6,12 +6,12 @@ StudAttributes = ['ID Number', 'Name', 'Course', 'Year Level', 'Gender']
 SDatabase = 'LISTSTUDENTS.csv'
 
 def main_menu():
-    print("--------------------------------------------")
-    print("      Simple Student Information System     ")
-    print("--------------------------------------------")
+    print("********************************************")
+    print("*     Simple Student Information System    *")
+    print("********************************************")
     print("1. View Students")
     print("2. Add New Student")
-    print("3. Edit Student")
+    print("3. Update Student")
     print("4. Delete Student")
     print("5. Search Student")
     print("6. Quit")
@@ -21,15 +21,15 @@ def ViewStudents():
     global StudAttributes
     global SDatabase
     
-    print("---------------------")
-    print("    Student List     ")
-    print("---------------------")
+    print("...................................")
+    print(".           Student List          .")
+    print("...................................")
     
-    with open(SDatabase, "r", encoding = "utf-8") as f:
+    with open(SDatabase, "r") as f:
         reader = csv.reader(f)
         for x in StudAttributes:
             print( x, end = "\n   ")
-        print("\n----------------------------------------------------------")
+        print("\n......................................")
         
         for row in reader:
             for item in row:
@@ -41,9 +41,9 @@ def ViewStudents():
 
 '''ADD STUDENT'''
 def AddStudent():
-    print("---------------------")
-    print("     Add Student     ")
-    print("---------------------")
+    print("...................................")
+    print(".            Add Student          .")
+    print("...................................")
     
     global StudAttributes
     global SDatabase
@@ -53,11 +53,18 @@ def AddStudent():
         value = input("Enter " + field + ": ")
         SData.append(value)
         
-    with open(SDatabase, "a", encoding = "utf-8") as f:
+        
+    with open(SDatabase, "a") as f:
         writer = csv.writer(f)
         writer.writerows([SData])
-    
-    print("Data saved successfully!")
+        
+    yn = input("Are you sure you want to add a student " + "? (Y/N):  ")
+    if yn == "N":
+        print("Action terminated.")
+        input("Press any key to continue: ")
+        return 
+            
+    print("Student's Data has been saved successfully!")
     input("Press any key to continue: ")
     return
 
@@ -67,14 +74,14 @@ def UpdateStudent():
     global StudAttributes
     global SDatabase
     
-    print("------------------------")
-    print("     Update Student     ")
-    print("------------------------")
+    print("...................................")
+    print(".          Update Student         .")
+    print("...................................")
     
     IDnum = input("Enter ID Number of student to update: ")
     indexstud = None
     updatedData = []
-    with open(SDatabase, "r", encoding = "utf-8") as f:
+    with open(SDatabase, "r") as f:
         reader = csv.reader(f)
         counter = 0
         for row in reader:
@@ -93,7 +100,12 @@ def UpdateStudent():
                 
     '''CHECK IF STUDENT IS/NOT FOUND'''
     if indexstud is not None:
-        with open(SDatabase, "w", encoding = "utf-8") as f:
+        yn = input("Are you sure you want to update " + IDnum + "? (Y/N):  ")
+        if yn == "N":
+            print("Action terminated.")
+            input("Press any key to continue: ")
+            return
+        with open(SDatabase, "w") as f:
             writer = csv.writer(f)
             writer.writerows(updatedData)
             
@@ -110,14 +122,14 @@ def DeleteStudent():
     global StudAttributes
     global SDatabase
     
-    print("------------------------")
-    print("     Remove student     ")
-    print("------------------------")
+    print("...................................")
+    print(".          Remove student         .")
+    print("...................................")
     
     IDnum = input("Enter ID Number of student to remove: ")
     StudentFound = False
     UpdatedData = []
-    with open(SDatabase, "r", encoding = "utf-8") as f:
+    with open(SDatabase, "r") as f:
         reader = csv.reader(f)
         counter = 0
         for row in reader:
@@ -129,7 +141,12 @@ def DeleteStudent():
                     StudentFound = True
     
     if StudentFound is True:
-        with open(SDatabase, "w", encoding = "utf-8") as f:
+        yn = input("Are you sure you want to delete " + IDnum + "? (Y/N):  ")
+        if yn == "N":
+            print("Action terminated.")
+            input("Press any key to continue: ")
+            return
+        with open(SDatabase, "w") as f:
             writer = csv.writer(f)
             writer.writerows(UpdatedData)
         print("ID Number: ", IDnum, "has been removed successfully")
@@ -145,12 +162,12 @@ def SearchStudent():
     global StudAttributes
     global SDatabase
     
-    print("------------------------")
-    print("     Search Student     ")
-    print("------------------------")
+    print("...................................")
+    print(".         Search Student          .")
+    print("...................................")
     
-    IDnum = input("Enter ID Number to search: ")
-    with open(SDatabase, "r", encoding = "utf-8") as f:
+    IDnum = input("Enter ID number to search: ")
+    with open(SDatabase, "r") as f:
         reader = csv.reader(f)
         for row in reader:
             if len(row) > 0:
@@ -190,6 +207,6 @@ while True:
 
 
 
-print("------------------------------------")
-print("     System has been terminated     ")
-print("------------------------------------")
+print("********************************************")
+print("*        System has been terminated        *")
+print("********************************************")

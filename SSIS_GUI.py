@@ -81,7 +81,7 @@ class student:
                     Gender = row['Gender']
                     Course = row['Course']
                     YearLevel = row['Year Level']
-                    tree.insert("", 0, values=(studentid, Name, Gender, Course, YearLevel))
+                    tree.insert("", END, values=(studentid, Name, Gender, Course, YearLevel))
 
         def deletestud():
            x= tree.focus()
@@ -136,7 +136,7 @@ class student:
             
         def editstud():
             if tree.focus() == "":
-                tkinter.messagebox.showerror("SSIS", "Sorry Please Select a Student to Update .")
+                tkinter.messagebox.showerror("SSIS", "Sorry Please Select a Student.")
                 return
             values = tree.item(tree.focus(), "values")
             StudentIDNumber.set(values[0])
@@ -302,5 +302,4 @@ if __name__=='__main__':
     root = Tk()
     application = student(root) 
     root.mainloop()       
-        
-
+    

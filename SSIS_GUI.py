@@ -155,8 +155,12 @@ class student:
                                                         'Gender': Gender.get(),
                                                         'Course': Course.get(),
                                                         'Year Level': YearLevel.get()}
+                    
+                result = tkinter.messagebox.askquestion("SSIS","Are you sure to update this record?")
+                if result == "yes":
+                    self.data.pop(csvfile, None)
                     self.saveData()
-                    tkinter.messagebox.showinfo("SIS", "Student Has Been Recorded Successfully")
+                    tkinter.messagebox.showinfo("SIS", "Student Has Been Updated Successfully")
                     Clear()
                 displayStudent()   
                 
@@ -302,4 +306,5 @@ if __name__=='__main__':
     root = Tk()
     application = student(root) 
     root.mainloop()       
-    
+        
+
